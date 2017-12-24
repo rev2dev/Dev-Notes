@@ -1,0 +1,1 @@
+{"titre":"Multi colonne","texte":"<code><pre>\r\n                           div {\r\n                              -webkit-column-count: 3; \/* Chrome, Safari, Opera *\/\r\n                              -moz-column-count: 3; \/* Firefox *\/\r\n                              column-count: 3;\r\n                           }\r\n                         <\/pre><\/code>"}

@@ -1,0 +1,131 @@
+@import "http://localhost/CEAM/projets/CEAM.css";
+body{
+	padding-bottom : 20px;
+}
+/* NIVEAU 1 */
+dl.liste_niveau{
+	counter-reset: compteur-personalise;
+}
+
+dt.niveau:before{
+	content: counter(compteur-personalise, decimal) url('puce6.gif');
+	counter-increment: compteur-personalise;
+	font-size: 26px;
+	line-height: 1.4;
+	margin: 0 5px;
+}
+
+.niveau > .libelle {
+	border: 1px solid transparent;
+}
+
+.niveau > .liste_niveau{  	/* liste ordonnée dans un élément de liste  */
+	position: absolute;
+	visibility: hidden;
+	margin-left : 60px;
+	margin-top : -5px;
+	width : 80%;
+    /* transition: box-shadow 2s ease-out, visibility 2s ease-out; */
+}
+.liste_niveau > .niveau{   /* un élément de liste ordonnée dans un élément de liste enfant  */
+	display : none;
+}
+
+body > .liste_niveau > .niveau{ /* 1er niveau visible*/
+	display : block;
+}
+
+/* SURVOL NIVEAU1 */
+.niveau:hover > .libelle{
+	border : 1px solid blue;
+	background-color : #acacac;
+}
+
+dt.niveau.cliquee:before{
+	content: counter(compteur-personalise, decimal) url('puceBas.gif');
+}
+
+.niveau.cliquee > .libelle{
+	text-shadow: -20px 10px 2px rgba(50, 50, 50, 0.5);
+}
+
+ol .niveau.cliquee  .libelle {
+	display: list-item;
+}
+
+.niveau.cliquee > .liste_niveau {
+	visibility: visible;
+	position : absolute;
+	background-color : white;
+	padding: 10px 30px 20px;
+	border : 1px solid #eeeeee;
+	box-shadow: -20px 10px 2px rgba(50, 50, 50, 0.5);
+	transition: box-shadow 2s ease-out, visibility 2s ease-out;
+}
+
+.niveau.cliquee > .liste_niveau > .niveau{
+   /* rend visible le 'paragr*/
+	display: block;
+	border-bottom : 2px solid #ececec;
+}
+
+
+ /*******/
+h2{
+	display : inline-block;
+	margin-bottom : 15px;
+}
+
+cite {
+	padding : 1px 2px;
+	box-shadow: 0 0 4px 1px #000;
+	line-height: 2rem;
+}
+
+code, code pre²{
+	background-color : #e0e0eb;
+}
+
+code pre{
+	display: block;
+}
+
+ol.version li{
+	list-style-type: lower-alpha;
+	margin-bottom : 3px;
+}
+
+div.code{
+	border : 1px solid lightgrey;
+}
+div.resultat{
+	border : 1px solid lightgrey;
+}
+.code, .wysiwyg{
+	width : 48%;
+	float : left;
+}
+.wysiwyg{
+	text-align : center;
+}
+
+.testevent textarea{
+    height: 70%;
+    resize: none;
+}
+.testevent #zonesaisie{
+	width : 26%;
+}
+.testevent #zoneresultat{
+	width : 70%;
+}
+
+/* TEST Variable CSS / seulement FF */
+
+body {
+    background-color: var(--bg);
+    padding-bottom: 20px;
+}
+:root {
+    --bg: #f5f5f5; /*whitesmoke*/
+}
