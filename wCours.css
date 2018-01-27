@@ -1,13 +1,35 @@
-@import "http://localhost/CEAM/projets/CEAM.css";
-body{
-	padding-bottom : 20px;
+@import "http://ceam.rev2dev.fr/projets/CSS/CEAM.css";
+/* TEST Variable CSS / seulement FF */
+:root {
+    --bg: #ededed;
+    --devert: #00DE00;
 }
+
+html {
+   overflow: hidden;
+   height: 100vh;	
+}
+
+body {
+   background-color: var(--bg);
+   padding-bottom: 20px;
+/*   overflow: hidden;
+   height: 100vh;*/
+   overflow-y: scroll;
+   height: 100%;   
+}
+
+section.principale {
+/*   overflow-y: scroll;
+   height: 100%;   */
+}
+
 /* NIVEAU 1 */
-dl.liste_niveau{
+dl.liste_niveau {
 	counter-reset: compteur-personalise;
 }
 
-dt.niveau:before{
+dt.niveau:before {
 	content: counter(compteur-personalise, decimal) url('puce6.gif');
 	counter-increment: compteur-personalise;
 	font-size: 26px;
@@ -16,30 +38,33 @@ dt.niveau:before{
 }
 
 .niveau > .libelle {
-	border: 1px solid transparent;
+	border: 1px solid transparent; /* pour éviter l'impression de déplacement quand, au survol, apparait une bordure */
+	padding: 0 5px 0;
 }
 
-.niveau > .liste_niveau{  	/* liste ordonnée dans un élément de liste  */
+.niveau > .liste_niveau  {  	/* liste ordonnée dans un élément de liste  */
 	position: absolute;
 	visibility: hidden;
-	margin-left : 60px;
+	margin-left : 50px;
 	margin-top : -5px;
 	width : 80%;
     /* transition: box-shadow 2s ease-out, visibility 2s ease-out; */
 }
-.liste_niveau > .niveau{   /* un élément de liste ordonnée dans un élément de liste enfant  */
+
+.liste_niveau > .niveau {   /* un élément de liste ordonnée dans un élément de liste enfant  */
 	display : none;
 }
 
-body > .liste_niveau > .niveau{ /* 1er niveau visible*/
+section > .liste_niveau > .niveau{ /* 1er niveau visible */
 	display : block;
 }
 
 /* SURVOL NIVEAU1 */
 .niveau:hover > .libelle{
-	border : 1px solid blue;
+	border-color : blue;
 	background-color : #acacac;
 }
+
 
 dt.niveau.cliquee:before{
 	content: counter(compteur-personalise, decimal) url('puceBas.gif');
@@ -47,13 +72,15 @@ dt.niveau.cliquee:before{
 
 .niveau.cliquee > .libelle{
 	text-shadow: -20px 10px 2px rgba(50, 50, 50, 0.5);
+	border-color: var(--devert);
+	background-color: #8c8c8c;
 }
 
 ol .niveau.cliquee  .libelle {
 	display: list-item;
 }
 
-.niveau.cliquee > .liste_niveau {
+.niveau.cliquee  > .liste_niveau  {
 	visibility: visible;
 	position : absolute;
 	background-color : white;
@@ -63,10 +90,12 @@ ol .niveau.cliquee  .libelle {
 	transition: box-shadow 2s ease-out, visibility 2s ease-out;
 }
 
-.niveau.cliquee > .liste_niveau > .niveau{
-   /* rend visible le 'paragr*/
+.niveau.cliquee > .liste_niveau > .niveau {
 	display: block;
 	border-bottom : 2px solid #ececec;
+}
+
+.niveau:hover .liste_niveau  {
 }
 
 
@@ -74,6 +103,7 @@ ol .niveau.cliquee  .libelle {
 h2{
 	display : inline-block;
 	margin-bottom : 15px;
+	text-transform: uppercase;
 }
 
 cite {
@@ -82,11 +112,11 @@ cite {
 	line-height: 2rem;
 }
 
-code, code pre²{
+code, code pre {
 	background-color : #e0e0eb;
 }
 
-code pre{
+code pre {
 	display: block;
 }
 
@@ -118,14 +148,4 @@ div.resultat{
 }
 .testevent #zoneresultat{
 	width : 70%;
-}
-
-/* TEST Variable CSS / seulement FF */
-
-body {
-    background-color: var(--bg);
-    padding-bottom: 20px;
-}
-:root {
-    --bg: #f5f5f5; /*whitesmoke*/
 }
