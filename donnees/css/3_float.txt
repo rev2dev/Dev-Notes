@@ -1,1 +1,0 @@
-{"titre":"float","texte":"Pour que la propri\u00e9t\u00e9 <mark>float<\/mark> soit bien pris en compte (par exemple, une image dans une div), il faut ajouter les _caract\u00e9ristiques_ css suivantes au pseudo-s\u00e9lecteur <code>::after<\/code> :\r\n<pre>\r\ndiv::after {\r\n    content: \"\";\r\n    clear: both;\r\n    display: table;\r\n}\r\n<\/pre>"}

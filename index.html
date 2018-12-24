@@ -3,11 +3,32 @@
 <head>
 	<meta charset="utf-8">
 	<link type="text/css" rel="stylesheet" href="wCours.css">
-	<script type="text/javascript" src="CEAM.js"></script>
-	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="/CEAM/projets/CEAM.js"></script>
 	<title>HELP !!!</title>
+	<script>
+window.addEventListener("load", function(){
+	mnu = wselecteurs(".niveau > .libelle");
+	for(i in mnu){
+		if(!isNaN(i))
+			mnu[i].addEventListener("click", function(){
+dbg("<click .niveau",1);
+				if(waLaClasse(this.parentElement, "cliquee"))
+					wOteClasse(this.parentElement, "cliquee");
+				else
+					;
+					if((clqs = wclasses("cliquee")) != false){
+						wOteClasse(clqs, "cliquee");
+dbg(wclasses("cliquee"));
+					}
+					wAjouteClasse(this.parentElement, "cliquee");
+dbg(wclasses("cliquee"));
+dbg(">click .niveau",1);
+			});
+	}
+});		
+	</script>
 </head>
-
+	
 <body id="haut" >
 	<noscript>L'expérience utilisateur sera plus intense avec JavaScript activé... mais ce n'est pas obligatoire <div class="roth">:-)</div></noscript>
 	<dl class="liste_niveau">
@@ -56,10 +77,10 @@
 							</code></pre>
 						</li>
 						<li class="niveau"><h4>NodeList != HTMLCollection</h4>
-							<p>Tout élément d'une page est un <code>Node</code> (élément, attribut, texte,...). Les éléments HTML (dans <code>HTMLCollection</code>) sont des <code>Node</code> dont la propriété <code>.nodeType</code> est égale à 1 (constante <code>ELEMENT_NODE</code>)</p>
+							<p>Tout élément d'une page est un <code>Node</code> (élément, attribut, texte,...). Les éléments HTML (dans <code>HTMLCollection</code>) sont des <code>Node</code> dont la propriété <code>.nodeType</code> est égale à 1 (constante <code>ELEMENT_NODE</code>)</p>						
 						</li>
 					</ul>
-				</li> <!-- méthodes -->
+				</li> <!-- méthodes -->				
 				<li class="niveau"><h3 class="libelle">Ajouter un élément à une page HTML</h3>
 					<ol class="liste_niveau">
 						<li><h4>Créer un élément</h4>
@@ -75,11 +96,26 @@
 					</ol>
 				</li> <!-- ajouter -->
 				<li class="niveau"><h3 class="libelle">Modifier une page dynamiquement</h3>
+					<script>
+						var chgInnerHtml = function(choix){
+							console.log(choix);
+							switch(choix){
+								case "select":
+									document.getElementById("elementInnerHtml").innerHTML="&lt;select&gt;&lt;option&gt;1&lt;/option&gt;&lt;option&gt;2&lt;/option&gt;&lt;/select&gt;";
+									document.getElementById("elementInnerHtmlWYS").innerHTML="&lt;select&gt;&lt;option&gt;1&lt;/option&gt;&lt;option&gt;2&lt;/option&gt;&lt;/select&gt;";
+								break;
+								case "link":
+									document.getElementById("elementInnerHtml").innerHTML="&lt;a href='#top'&gt;Top&lt;/a&gt;";
+									document.getElementById("elementInnerHtmlWYS").innerHTML="<a href='#top'>Top</a>";
+								break;
+							}
+						}
+					</script>	
 					<ol class="liste_niveau">
 						<li class="niveau"><h4>innerHTML</h4>
 							<fieldset>
-								<label>sélection<input type="radio" name="inner" value="select"></label>
-								<label>lien			<input type="radio" name="inner" value="link" ></label>
+								<label>sélection<input type="radio" name="inner" value="select" onchange="chgInnerHtml(this.value)"></label>
+								<label>lien<input type="radio" name="inner" value="link" onchange="chgInnerHtml(this.value)"></label>
 							</fieldset><br>
 							<div class="code">
 								<code>&lt;div id=&quot;element&quot;&gt;</code>
@@ -90,7 +126,7 @@
 							</div>
 						</li>
 					</ol>
-				</li>
+				</li>				
 				<li class="niveau"><h3 class="libelle">Les Constantes</h3>
 					<ol class="liste_niveau">
 						<li><h4>Affectations</h4>
@@ -102,16 +138,16 @@
 						</li>
 						<li><h4>Nommage</h4>
 							<p>Par convention, le nom de la constante sera en MAJUSCULE</p>
-
+							
 						</li>
 					</ol>
-				</li> <!-- constantes -->
+				</li> <!-- constantes -->				
 				<li class="niveau"><h3 class="libelle">Les Chaînes de Caractères</h3>
 					<ol class="liste_niveau">
 						<li><h4>Caractère</h4>
 							<p>On peut accéder à un caractère par sa position dans la chaîne :</p>
 							<code>chaine[position] &lt;=&gt; chaine.substr(position, 1)</code>
-						</li>
+						</li>	
 						<li><h4>Dernier caratère d'une chaîne</h4>
 							<code>
 								var chaine = "ceci est une chaîne de caratères.";
@@ -124,9 +160,9 @@
 									<li><cite>chaine = chaine.substr(0, chaine.length-1);</cite></li>
 									<li><cite>chaine = chaine.substring(-2, str.length-1);</cite></li>
 								</ol>
-								chaine = "ceci est une chaîne de caratères"
+								chaine = "ceci est une chaîne de caratères"					
 							</code>
-						</li>
+						</li>						
 						<li><h4>Sous-chaîne : la différence entre <code>slice</code>, <code>substring</code> et <code>substr</code></h4>
 							<p>Les trois méthodes renvoient un chaîne tronquée : </p>
 							<ul>
@@ -139,25 +175,25 @@
 								<li>Un indice négatif sera interprété comme 0 (premier caratère de la chaîne) pour <code>substring</code></li>
 								<li>Dans le même cas, <code>slice</code> renverra "" (chaîne vide)</li>
 							</ul>
-						</li>
+						</li>						
 						<li><h4>Remplacement d'une sous-chaîne : replace</h4>
 							<code>replace("chaine_recherchee", "chaine_remplacante")</code>
 							La méthode renvoie une chaîne.
 						</li>
-					</ol>
-				</li><!-- chaîne -->
+					</ol>					
+				</li><!-- chaîne -->				
 				<li class="niveau"><h3 class="libelle">Les Tableaux</h3>
 					<ul class="liste_niveau">
 						<li class="niveau"><h4>Déclaration</h4>
 							<ol>
 								<li><code>var tableau = [];</code></li>
 								<li><code>var tableau = new Array();</code></li>
-							</ol>
+							</ol>							
 						</li>
 						<li><h4>Indice chaîne de caractères</h4>
 							<p>Bien qu'il ne soit pas possible, en théorie, de créer des indices de tableau de type string comme en php, il existe une astuce. </p>
 							<p>Il faut se rappeler que tout est objet en JavaScript. Donc un Array est un objet. Si on ajoute une valeur comme suit :</p>
-							<code>tableau['chaine'] = valeur</code>, cela revient à créer une propriété <cite>chaine</cite> à l'objet <cite>tableau</cite>.
+							<code>tableau['chaine'] = valeur</code>, cela revient à créer une propriété <cite>chaine</cite> à l'objet <cite>tableau</cite>. 
 							<p>Il devient alors possible de récupérer la valeur par deux syntaxes :</p>
 							<ul>
 								<li><code>tableau['chaine']</code> comme un indice de tableau</li>
@@ -172,14 +208,14 @@
 								<li>Par contre, le parcours par <code>for(i in tableau)</code> atteint les valeurs des indices string (ce qui peut permettre de compter le nombre de valeurs)</li>
 							</ol>
 							<p>En conclusion, il s'agit d'un gadget qui peut être pratique si on veux absolument utiliser des noms précis pour les indices, mais on ne peut plus considérer l'objet comme un tableau (en ce qui concerne ces indices string)</p>
-						</li>
-					</ul>
-				</li><!-- chaîne -->
+						</li>						
+					</ul>					
+				</li><!-- chaîne -->				
 				<li class="niveau"><h3 class="libelle">REGEX</h3>
 					<ol class="liste_niveau"><h4>Search</h4>
 						<li class="niveau">méthode search(motif) : </li>
-					</ol>
-				</li>
+					</ol>				
+				</li>			
 				<li class="niveau"><h3 class="libelle">Valeurs fausses</h3>
 					<ul class="liste_niveau">
 						<li class="niveau"><h4>False</h4>
@@ -195,18 +231,18 @@
 									 <cite>true</cite> contrairement à PHP.
 									Mais pour autant <code>unarray == true</code> vaut toujours <cite>false</cite>
 								</li>
-							</ul>
+							</ul>						
 						</li>
 						<li class="niveau"><h4>Comparaison</h4>
 							<ul class="liste_niveau">
 								<li><code>null == undefined</code> = <code>true</code></li>
 								<li><code>null === undefined</code> = <code>false</code></li>
 								<li><code>false == null</code> = <code>false</code></li>
-								<li><code>false === undefined</code> = <code>false</code></li>
-							</ul>
+								<li><code>false === undefined</code> = <code>false</code></li>								
+							</ul>						
 						</li>
 					</ul>
-				</li>
+				</li>				
 				<li class="niveau"><h3 class="libelle">Méthodes</h3>
 					<div class="liste_niveau"><pre>
 // constructor function
@@ -218,7 +254,7 @@ function MyClass () {
   };
 }
 
-// A 'static method', it's just like a normal function
+// A 'static method', it's just like a normal function 
 // it has no relation with any 'MyClass' object instance
 MyClass.staticMethod = function () {};
 
@@ -230,7 +266,7 @@ MyClass.prototype.publicMethod = function () {
 var myObj = new MyClass(); // new object instance
 
 myObj.publicMethod();
-MyClass.staticMethod();
+MyClass.staticMethod();				
 					</pre></div>
 				</li>
 				<li class="niveau"><h3 class="libelle">OBJETS</h3>
@@ -239,14 +275,14 @@ MyClass.staticMethod();
 							<p>Il suffit de comparer <cite>objet.propriete</cite> strictement avec <cite>undefined</cite></p>
 							<p>ex: <code>document.onwheel !== undefined</code></p>
 						</li>
-					</ul>
+					</ul>				
 				</li>
-
+			
 				<li class="niveau"><h3 class="libelle">ÉVÈNEMENTS</h3>
 					<ul class="liste_niveau">
 						<li class="niveau"><h4>BeforeUnload</h4>
 							<p>Pour que cet évènement soit déclenché (par Firefox), la gestionnaire doit retourner une chaîne !</p>
-							ex:
+							ex: 
 <pre><code>
 window.onload = function(){
                     //instructions;
@@ -254,14 +290,14 @@ window.onload = function(){
                 }
 </code></pre>
 						</li>
-					</ul>
+					</ul>				
 				</li>
-
+			
 				<li class="niveau"><h3 class="libelle">ERREURS</h3>
 					<div class="liste_niveau">
 						<code><pre>
 var logMyErrors = function(err){
- console.log(err);
+ console.log(err); 
 }
 try {
    throw "myException"; // generates an exception
@@ -283,14 +319,14 @@ try {
 } catch (e) {
     // statements to handle any unspecified exceptions
     logMyErrors(e); // pass exception object to error handler
-}
+}						
 						</pre></code>
-					</div>
+					</div>				
 				</li>
-
-			</ul>
+			
+			</ul>				
 		</dt><!-- JAVASCRIPT  -->
-		<dt class="niveau"><h2 class="libelle">CSS</h2>
+		<dt class="niveau"><h2 class="libelle">CSS</h2>	
 			<ul class="liste_niveau">
 				<li class="niveau"><h3 class="libelle">Multi colonne</h3>
 					<div class="liste_niveau">
@@ -302,13 +338,13 @@ div {
 }
 </pre></code>
 					</div>
-				</li>
+				</li>		
 				<li class="niveau"><h3 class="libelle">Cacher</h3>
 					<div class="liste_niveau">
 						<code><pre>
 div{
-	position: absolute;
-	visibility: hidden;
+	position: absolute; 
+	visibility: hidden; 
 }
 						</pre></code>
 	déclaration équivalente à
@@ -339,7 +375,7 @@ selecteur{
 						</li>
 						<li class="niveau"><h4>Type de fichier</h4>
 							<p>Tous les formats de police ne sont pas reconnus par tous les navigateurs... </p>
-
+							
 						</li>
 					</ol>
 				</li>
@@ -375,7 +411,7 @@ selecteur{
 						<li class="niveau"><h4>counter-increment</h4>
 							<p><code>selecteur{counter-increment : <cite>compteur</cite> <span title="valeur numérique, positive, nulle ou négative">intervalle</span>}</code></p>
 							<p>Sélecteur CSS qui va définir la valeur de l'incrémentation de <cite>compteur</cite>, selon un pas équivalent à <cite>intervalle</cite>.</p>
-
+							
 						</li>
 						<li class="niveau"><h4>content</h4>
 							<p>la propriété CSS <code>content</code> n'affecte que les pseudo-éléments <code>::after</code> et <code>::before</code>.</p>
@@ -385,7 +421,7 @@ selecteur{
 				</li>
 
 			</ul>
-		</dt>
+		</dt>		
 		<dt class="niveau"><h2 class="libelle">SQL</h2>
 			<ul class="liste_niveau">
 				<li class="niveau"><h3 class="libelle">UTF8</h3>
@@ -401,10 +437,10 @@ selecteur{
 							Rendre un élément contenant du texte (div, p, span, ...) modifiable  : Ajouter l'attribut <code>contenteditable</code>
 						</li>
 					</ul>
-
+				
 				</li>
-			</ul>
-		</dt>
+			</ul>				
+		</dt>		
 		<dt class="niveau"><h2 class="libelle">SEO</h2>
 			<ul class="liste_niveau">
 				<li class="niveau"><h3 class="libelle">&lt;meta description&gt;</h3>
@@ -431,17 +467,39 @@ selecteur{
 		</dt>
 		<dt><h2 class="libelle">JS : test KeyboardEvent</h2>
 			<button onclick="zonesaisie.value=''; zoneresultat.value='';">X</button><br>
+			<script> 
+				var appuyee = function(clavier){
+					zoneresultat.value += "KeyDown\n\t";
+					zoneresultat.value += "key:" + clavier.key + "\tcode:" + clavier.code + "\tkeyCode:" + clavier.keyCode + "\tcharCode:" + clavier.charCode + "\tkeyIdentifier:" + clavier.keyIdentifier + "\n" ;
+//					clavier.preventDefault();
+				};
+				var pressee = function(clavier){
+					zoneresultat.value += "KeyPress\n\t";
+					zoneresultat.value += "key:" + clavier.key + "\tcode:" + clavier.code + "\tkeyCode:" + clavier.keyCode + "\tcharCode:" + clavier.charCode + "\tkeyIdentifier:" + clavier.keyIdentifier + "\n" ;
+					clavier.preventDefault();
+				};
+				var relachee = function(clavier){
+					zoneresultat.value += "KeyUp\n\t";
+					zoneresultat.value += "key:" + clavier.key + "\tcode:" + clavier.code + "\tkeyCode:" + clavier.keyCode + "\tcharCode:" + clavier.charCode + "\tkeyIdentifier:" + clavier.keyIdentifier + "\n" ;
+					clavier.preventDefault();
+				};
+				window.onload = function(){
+					zonesaisie.addEventListener("keydown", appuyee);
+					zonesaisie.addEventListener("keypress", pressee);
+					zonesaisie.addEventListener("keyup", relachee);
+				}
+			</script>
 			<div class="testevent">
 				<textarea id="zonesaisie" spellcheck="false"></textarea>
 				<textarea id="zoneresultat" spellcheck="false"></textarea>
-			</div>
+			</div>		
 		</dt>
 	</dl><!-- liste_niveau -->
 
 	<div id="code" > </div>
 	<div id="resultat">
 	</div>
-
+	
 	<div id="bas"></div>
 	<br><br>
 	<a href="#haut">
@@ -454,14 +512,14 @@ selecteur{
 </body>
 </html>
 
-<!--
+<!-- 
 		<pre><code>
 		</code></pre>
-		élément AUDIO : volume {0, 1}
+		élément AUDIO : volume {0, 1} 
 		                muted  {false, true}
  -->
 
- 	<!--
+ 	<!-- 
 		<dt class="niveau"><h2 class="libelle"></h2>
 			<ul class="liste_niveau">
 				<li class="niveau"><h3 class="libelle"></h3>
@@ -485,5 +543,5 @@ selecteur{
 					</ol>
 				</li>
 			</ul>
-		</dt>
+		</dt>		
 	 -->
