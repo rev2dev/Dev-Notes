@@ -1,24 +1,22 @@
-<?php chdir("donnees");             ?> 
-<?php $dossiers = glob("*");        ?>
-<?php const PROJET = "dev-notes";   ?>
-<?php $title = "HELP !!! (PHP version 2.1)" ?>  
-<?php require_once("vues/" . PROJET . "/tete.vue.php"); ?>
- 
+<?php chdir("donnees");                                  ?> 
+<?php $dossiers = glob("*");                             ?>
+<?php const PROJET = "dev-notes";                        ?>
+<?php $title = "HELP !!! (PHP version 2.1)"              ?>  
+<?php $js = [ "/index.js" ]; ?>
+<?php require_once("vues/" . PROJET . "/tete.vue.php");  ?>
+<?php echo "<pre>"; var_dump($_SERVER);                  ?> 
 
 <body contextmenu="wenu">
-      <div id="haut"></div>
+   <div id="haut"></div>
    <section class="principale">      
       <a href="bin/enr.php" id="goenr"></a>
-      <menu type="context" id="wenu" label="Wenu">
-         <menuitem label="Ajouter/Modifier" icon="puceBas.gif" onclick="console.log('click menu'); wid('goenr').declenche('click');"></menuitem>
-         <menuitem label="Récupérer"><a href="bin/rec.php"></a></menuitem>
-      </menu>
-   <header>
-      <menu type="context" label="Wenu">
-         <li><a href="bin/enr.php">Ajouter/Modifier</a></li>
-         <li><a href="bin/rec.php">Récupérer</a></li>
-      </menu>
-   </header>
+      <?php //include_once("menu_context") ?>
+      <header>
+         <menu type="context" label="wenu">
+            <li><a href="bin/enr.php">Ajouter/Modifier</a></li>
+            <li><a href="bin/rec.php">Récupérer</a></li>
+         </menu>
+      </header>
       <noscript>L'expérience utilisateur sera plus intense avec JavaScript activé... mais ce n'est pas obligatoire <div class="roth">:-)</div></noscript>
 
       <dl class="liste_niveau">
